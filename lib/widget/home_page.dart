@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shoping_list/dio/dio_client.dart';
+import 'package:shoping_list/model/products.dart';
+import 'package:shoping_list/model/shoping_list.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -8,11 +11,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final DioClient _client = DioClient();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('User Info'),
+      ),
       body: Center(
-        child: Text("text"),
+        child: FutureBuilder<ShopingList?>(
+          future: _client.getProductList(endpoint: 'products'),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              ShopingList? userInfo = snapshot.data;
+              if (userInfo != null) {
+                Products userData = userInfo.products;
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '${userData.name} ${userData.done}',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                  ],
+                );
+              }
+            }
+            return CircularProgressIndicator();
+          },
+        ),
       ),
     );
   }

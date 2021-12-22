@@ -10,7 +10,7 @@ class ShopingList {
     required this.products,
   });
 
-  Products products;
+  List<Products> products;
 
   factory ShopingList.fromJson(Map<String, dynamic> json) =>
       _$ShopingListFromJson(json);

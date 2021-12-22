@@ -7,7 +7,9 @@ part of 'shoping_list.dart';
 // **************************************************************************
 
 ShopingList _$ShopingListFromJson(Map<String, dynamic> json) => ShopingList(
-      products: Products.fromJson(json['products'] as Map<String, dynamic>),
+      products: (json['products'] as List<dynamic>)
+          .map((e) => Products.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ShopingListToJson(ShopingList instance) =>
