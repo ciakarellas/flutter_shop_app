@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class HttpService {
-  Dio _dio;
+  late Dio _dio;
   final baseUrl = "http://127.0.0.1:3000";
   HttpService() {
     _dio = Dio(BaseOptions(

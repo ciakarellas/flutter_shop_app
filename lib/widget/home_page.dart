@@ -26,15 +26,10 @@ class _HomePageState extends State<HomePage> {
             if (snapshot.hasData) {
               ShopingList? userInfo = snapshot.data;
               if (userInfo != null) {
-                Products userData = userInfo.products;
+                List<Products> userData = userInfo.products;
                 return Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      '${userData.name} ${userData.done}',
-                      style: TextStyle(fontSize: 16.0),
-                    ),
-                  ],
+                  children: userData.map((e) => Text(e.name)).toList(),
                 );
               }
             }
