@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final DioClient _client = DioClient();
+  DioClient _client = DioClient();
 
   @override
   Widget build(BuildContext context) {
