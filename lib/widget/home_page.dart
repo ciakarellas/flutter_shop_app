@@ -14,9 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DioClient _client = DioClient();
-  ShopingListProvider shopingListProvider = ShopingListProvider();
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
