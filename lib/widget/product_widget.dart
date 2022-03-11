@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shoping_list/model/products.dart';
+import 'package:shoping_list/provider/shopping_list_provider.dart';
 
 class ProductWidget extends StatefulWidget {
   final Products products;
@@ -30,6 +32,9 @@ class _ProductWidgetState extends State<ProductWidget> {
             setState(() {
               val = value!;
             });
+            Provider.of<ShopingListProvider>(context, listen: false)
+                .putProductChange(
+                    widget.products.id, widget.products.name, val);
           }),
     );
   }

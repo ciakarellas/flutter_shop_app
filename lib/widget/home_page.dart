@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoping_list/dio/dio_client.dart';
@@ -15,28 +18,38 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {}
+
+  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ShopingListProvider(),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('User Info'),
-        ),
-        body: Container(
+          appBar: AppBar(
+            title: Text('User Info'),
+          ),
+          body: Container(
             margin: EdgeInsets.all(24.0),
             child: Builder(
               builder: (context) {
                 final model = Provider.of<ShopingListProvider>(context);
-
-                return ListView.builder(
-                    itemCount: model.productList.products.length,
-                    itemBuilder: (context, item) {
-                      return ProductWidget(
-                          products: model.productList.products[item]);
-                    });
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    await Future.delayed(const Duration(seconds: 1));
+                    model.getShopingList();
+                    // model.productList;
+                  },
+                  child: ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: model.productList.products.length,
+                      itemBuilder: (context, item) {
+                        return ProductWidget(
+                            products: model.productList.products[item]);
+                      }),
+                );
               },
-            )),
-      ),
+            ),
+          )),
     );
   }
 }

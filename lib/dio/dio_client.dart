@@ -32,4 +32,26 @@ class DioClient {
     }
     return shopingList;
   }
+
+  Future<void> putProduct(
+      {required int id, required String name, required bool done}) async {
+    try {
+      Response response = await _dio.put(_baseUrl + 'products/' + id.toString(),
+          options: Options(
+              headers: {"Accept": "*/*", "ContentType": "application/json"}),
+          data: {"name": name, "id": id, "done": done});
+      print('Shoping list: ${response.data}');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+    }
+  }
 }

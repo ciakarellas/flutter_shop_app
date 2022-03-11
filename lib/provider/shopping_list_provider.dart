@@ -18,4 +18,8 @@ class ShopingListProvider extends ChangeNotifier {
         await _client.getProductList(endpoint: 'products') as ShopingList;
     notifyListeners();
   }
+
+  Future<void> putProductChange(int id, String name, bool done) async {
+    await _client.putProduct(id: id, name: name, done: done);
+  }
 }
