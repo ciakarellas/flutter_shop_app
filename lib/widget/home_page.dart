@@ -30,9 +30,9 @@ class _HomePageState extends State<HomePage> {
           ),
           body: Container(
             margin: EdgeInsets.all(24.0),
-            child: Builder(
-              builder: (context) {
-                final model = Provider.of<ShopingListProvider>(context);
+            child: Consumer<ShopingListProvider>(
+              builder: (context, model, child) {
+                //final model = Provider.of<ShopingListProvider>(context);
                 return RefreshIndicator(
                   onRefresh: () async {
                     await Future.delayed(const Duration(seconds: 1));

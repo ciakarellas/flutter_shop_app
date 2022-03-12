@@ -20,6 +20,7 @@ class _ProductWidgetState extends State<ProductWidget> {
     // TODO: implement initState
     super.initState();
     val = widget.products.done;
+    print("change ${widget.products.name}");
   }
 
   @override
@@ -27,14 +28,14 @@ class _ProductWidgetState extends State<ProductWidget> {
     return Container(
       child: CheckboxListTile(
           title: Text(widget.products.name),
-          value: val,
+          value: widget.products.done, //val,
           onChanged: (value) {
-            setState(() {
-              val = value!;
-            });
+            //setState(() {
+            //val = value!;
+            //});
             Provider.of<ShopingListProvider>(context, listen: false)
                 .putProductChange(
-                    widget.products.id, widget.products.name, val);
+                    widget.products.id, widget.products.name, value!);
           }),
     );
   }
