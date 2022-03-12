@@ -16,14 +16,6 @@ class _ProductWidgetState extends State<ProductWidget> {
   late bool val;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    val = widget.products.done;
-    print("change ${widget.products.name}");
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: CheckboxListTile(
