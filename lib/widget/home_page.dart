@@ -28,6 +28,13 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             title: Text('User Info'),
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // Add your onPressed code here!
+            },
+            backgroundColor: Colors.blue,
+            child: const Icon(Icons.add),
+          ),
           body: Container(
             margin: EdgeInsets.all(24.0),
             child: Consumer<ShopingListProvider>(
