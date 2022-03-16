@@ -17,10 +17,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {}
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _controller = TextEditingController();
 
-  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ShopingListProvider(),
@@ -30,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // Add your onPressed code here!
+              Navigator.pushNamed(context, "/add");
             },
             backgroundColor: Colors.blue,
             child: const Icon(Icons.add),
@@ -57,6 +56,33 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           )),
+    );
+  }
+
+  Future<void> _displayDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add a new todo item'),
+          content: TextField(
+            controller: _controller,
+            decoration: const InputDecoration(hintText: 'Type your new todo'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Add'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Provider.of<ShopingListProvider>(context, listen: false)
+                    .getShopingList();
+                _controller.clear();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoping_list/widget/add_product_to_list_form.dart';
 import 'package:shoping_list/widget/home_page.dart';
 
 void main() {
@@ -14,7 +15,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      //home: HomePage(),
+      initialRoute: "/home",
+      routes: {
+        "/home": (context) => HomePage(),
+        "/add": (context) => const AddProductToListForm()
+      },
     );
   }
 }
